@@ -5,11 +5,19 @@ import { calculateDuration, formatDate } from '../../utils/dateUtils';
 const ExperienceCard = ({ experience, onRemove, index }) => {
   return (
     <div
-      className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300 animate-slide-up"
+      className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100 hover:shadow-2xl transition-all duration-300 animate-slide-up relative"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-      <div className="flex justify-between items-start mb-6">
-        <div className="flex-1">
+      <button
+        onClick={() => onRemove(experience.id)}
+        className="absolute top-4 right-4 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors duration-200"
+        aria-label="Remove experience"
+      >
+        <Trash2 className="w-5 h-5" />
+      </button>
+
+      <div className="grid grid-cols-12 gap-6 items-start">
+        <div className="col-span-12 md:col-span-10">
           <div className="flex items-center space-x-3 mb-2">
             {/* Remove background and border, align icon/logo with text */}
             {experience.companyLogo ? (
@@ -45,8 +53,15 @@ const ExperienceCard = ({ experience, onRemove, index }) => {
                 {experience.current ? ' Present' : ` ${formatDate(experience.endDate)}`}
               </span>
             </div>
-            <div className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">
-              {calculateDuration(experience.startDate, experience.endDate, experience.current)}
+            <div className="flex items-center gap-4">
+              <div className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">
+                {calculateDuration(experience.startDate, experience.endDate, experience.current)}
+              </div>
+              {experience.category && (
+                <div className="bg-linkedin-50 text-linkedin-700 px-3 py-1 rounded-full text-sm font-medium">
+                  {experience.category}
+                </div>
+              )}
             </div>
           </div>
 
@@ -71,13 +86,6 @@ const ExperienceCard = ({ experience, onRemove, index }) => {
             </div>
           )}
         </div>
-
-        <button
-          onClick={() => onRemove(experience.id)}
-          className="ml-4 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors duration-200"
-        >
-          <Trash2 className="w-5 h-5" />
-        </button>
       </div>
     </div>
   );

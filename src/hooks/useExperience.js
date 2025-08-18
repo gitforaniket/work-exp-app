@@ -6,7 +6,7 @@ const useExperience = () => {
 
   const addExperience = (experienceData) => {
     const newExperience = {
-      ...experienceData,
+  ...experienceData,
       id: Date.now(),
       achievements: experienceData.achievements.filter(achievement => achievement.trim() !== '')
     };

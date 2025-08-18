@@ -36,6 +36,7 @@ const ExperienceForm = ({ onSubmit, onCancel, showCancel }) => {
     companyLogo: '',
     position: '',
     location: '',
+  category: 'Full-time',
     startDate: '',
     endDate: '',
     current: false,
@@ -330,7 +331,7 @@ const ExperienceForm = ({ onSubmit, onCancel, showCancel }) => {
     }
 
     onSubmit({
-      ...formData,
+  ...formData,
       id: Date.now().toString()
     });
 
@@ -340,6 +341,7 @@ const ExperienceForm = ({ onSubmit, onCancel, showCancel }) => {
       companyDomain: '',
       companyLogo: '',
       position: '',
+  category: 'Full-time',
       location: '',
       startDate: '',
       endDate: '',
@@ -464,6 +466,31 @@ const ExperienceForm = ({ onSubmit, onCancel, showCancel }) => {
               ))}
             </ul>
           )}
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="space-y-2">
+            <label htmlFor="category" className="block text-sm font-medium text-gray-700">Experience Category</label>
+            <select
+              id="category"
+              name="category"
+              value={formData.category}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-linkedin-500 focus:border-transparent transition-all duration-200 appearance-none pr-12"
+              style={{
+                backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M6 8l4 4 4-4' stroke='%230A66C2' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'right 0.75rem center',
+                backgroundSize: '1rem'
+              }}
+            >
+              <option>Full-time</option>
+              <option>Part-time</option>
+              <option>Contract</option>
+              <option>Freelance</option>
+              <option>Volunteer</option>
+            </select>
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">

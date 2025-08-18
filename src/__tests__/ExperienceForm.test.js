@@ -11,6 +11,7 @@ describe('ExperienceForm', () => {
     expect(screen.getByLabelText(/company name/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/position/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/location/i)).toBeInTheDocument();
+  expect(screen.getByLabelText(/experience category/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/start date/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/end date/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/job description/i)).toBeInTheDocument();

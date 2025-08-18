@@ -8,6 +8,7 @@ describe('ExperienceCard', () => {
     company: 'TestCorp',
     companyLogo: '',
     position: 'Developer',
+  category: 'Full-time',
     location: 'Remote',
     startDate: '2020-01-01',
     endDate: '2021-01-01',
