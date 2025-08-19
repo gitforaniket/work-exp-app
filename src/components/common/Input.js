@@ -19,7 +19,7 @@ const Input = ({
   return (
     <div className={`space-y-2 ${className}`}>
       {label && (
-        <label htmlFor={inputId} className="block text-sm font-medium text-gray-700">
+        <label htmlFor={inputId} className="block text-sm font-medium text-gray-700 dark:text-gray-200">
           {label} {required && <span className="text-red-500">*</span>}
         </label>
       )}
@@ -35,7 +35,7 @@ const Input = ({
           </span>
         ) : Icon && (
           <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-            <Icon className="w-5 h-5 text-gray-400" />
+            <Icon className="w-5 h-5 text-gray-400 dark:text-gray-300" />
           </span>
         )}
         <input
@@ -47,7 +47,7 @@ const Input = ({
           placeholder={placeholder}
           required={required}
           disabled={disabled}
-          className={`w-full ${(Icon || iconImg) ? 'pl-10' : 'pl-4'} pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-linkedin-500 focus:border-transparent transition-all duration-200 ${disabled ? 'bg-gray-100' : ''}`}
+          className={`w-full ${(Icon || iconImg) ? 'pl-10' : 'pl-4'} pr-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-linkedin-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400 ${disabled ? 'bg-gray-100 dark:bg-slate-600' : ''}`}
           {...props}
         />
       </div>

@@ -29,7 +29,7 @@ const App = () => {
         {experiences.length > 0 && (
           <div className="space-y-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-2xl font-bold text-gray-800">Your Work Experience</h2>
+              <h2 className="text-2xl font-bold text-gray-800 dark:text-white">Your Work Experience</h2>
               {!showForm && (
                 <Button onClick={toggleForm}>
                   <Plus className="w-4 h-4 mr-2" />
