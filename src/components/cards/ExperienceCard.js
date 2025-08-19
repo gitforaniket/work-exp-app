@@ -34,7 +34,7 @@ const ExperienceCard = ({ experience, onRemove, index }) => {
               </span>
             )}
             <div>
-              <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100">{experience.position}</h3>
+              <h3 className="text-xl font-bold text-gray-800 dark:text-white">{experience.position}</h3>
               <p className="text-lg text-indigo-600 dark:text-indigo-300 font-semibold">{experience.company}</p>
             </div>
           </div>
@@ -71,7 +71,7 @@ const ExperienceCard = ({ experience, onRemove, index }) => {
 
           {experience.achievements.length > 0 && (
             <div>
-      <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-2 flex items-center">
+              <h4 className="font-semibold text-gray-800 dark:text-white mb-2 flex items-center">
                 <Award className="w-4 h-4 mr-2 text-yellow-500" />
                 Key Achievements
               </h4>

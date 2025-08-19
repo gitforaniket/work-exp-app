@@ -359,7 +359,7 @@ const ExperienceForm = ({ onSubmit, onCancel, showCancel }) => {
 
   return (
     <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8 mb-8 border border-gray-100 dark:border-gray-700 animate-slide-up">
-      <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+      <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6 flex items-center">
         <Plus className="w-6 h-6 mr-2 text-linkedin-600" />
         Add Work Experience
       </h2>
@@ -386,16 +386,56 @@ const ExperienceForm = ({ onSubmit, onCancel, showCancel }) => {
                 {companySuggestions.map((c, index) => (
                   <li
                     key={c.domain}
-                    className={`flex items-center px-4 py-2 cursor-pointer ${
-                      index === companySelectedIndex 
-                        ? 'bg-linkedin-100 text-linkedin-800 dark:bg-linkedin-800 dark:text-linkedin-100' 
-                        : 'hover:bg-linkedin-50 dark:hover:bg-slate-700'
-                    }`}
+                    className={`flex items-center px-4 py-2 cursor-pointer text-gray-800 dark:text-gray-100 ${
+                        index === companySelectedIndex 
+                          ? 'bg-linkedin-100 text-linkedin-800 dark:bg-linkedin-800 dark:text-linkedin-100' 
+                          : 'hover:bg-linkedin-50 dark:hover:bg-slate-700'
+                      }`}
                     onMouseDown={() => handleCompanySelect(c)}
                     onMouseEnter={() => setCompanySelectedIndex(index)}
                   >
-                    <img src={c.logo} alt={c.name} className="w-6 h-6 mr-2 bg-white rounded" onError={e => { e.target.style.display = 'none'; }} />
-                    <span>{c.name}</span>
+                      {/* logo container to ensure visibility on light and dark backgrounds */}
+                      {(() => {
+                        // prefer provided logo, otherwise fall back to Clearbit logo endpoint using domain
+                        const fallbackLogo = c.domain ? `https://logo.clearbit.com/${c.domain}` : null;
+                        const src = c.logo || fallbackLogo;
+                        if (src) {
+                          return (
+                            <div className="w-6 h-6 mr-2 rounded flex items-center justify-center bg-white dark:bg-slate-700 p-1">
+                              <img
+                                src={src}
+                                alt={c.name}
+                                className="max-w-full max-h-full block"
+                                data-domain={c.domain || ''}
+                                onError={(e) => {
+                                  try {
+                                    const target = e.target;
+                                    const tried = target.dataset.triedFallback;
+                                    const domain = target.dataset.domain;
+                                    if (!tried && domain) {
+                                      // try Clearbit logo as fallback
+                                      target.dataset.triedFallback = '1';
+                                      target.src = `https://logo.clearbit.com/${domain}`;
+                                      return;
+                                    }
+                                  } catch (err) {
+                                    // ignore
+                                  }
+                                  // hide if all attempts failed
+                                  e.target.style.display = 'none';
+                                }}
+                              />
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <span className="w-6 h-6 mr-2 flex items-center justify-center rounded bg-gray-100 dark:bg-slate-700">
+                            <Building2 className="w-4 h-4 text-gray-400 dark:text-gray-200" />
+                          </span>
+                        );
+                      })()}
+                      <span className="truncate">{c.name}</span>
                   </li>
                 ))}
               </ul>
@@ -419,11 +459,11 @@ const ExperienceForm = ({ onSubmit, onCancel, showCancel }) => {
                 {positionSuggestions.map((title, index) => (
                   <li
                     key={index}
-                    className={`flex items-center px-4 py-2 cursor-pointer ${
-                      index === positionSelectedIndex 
-                        ? 'bg-linkedin-100 text-linkedin-800 dark:bg-linkedin-800 dark:text-linkedin-100' 
-                        : 'hover:bg-linkedin-50 dark:hover:bg-slate-700'
-                    }`}
+                    className={`flex items-center px-4 py-2 cursor-pointer text-gray-800 dark:text-gray-100 ${
+                        index === positionSelectedIndex 
+                          ? 'bg-linkedin-100 text-linkedin-800 dark:bg-linkedin-800 dark:text-linkedin-100' 
+                          : 'hover:bg-linkedin-50 dark:hover:bg-slate-700'
+                      }`}
                     onMouseDown={() => handlePositionSelect(title)}
                     onMouseEnter={() => setPositionSelectedIndex(index)}
                   >
@@ -453,7 +493,7 @@ const ExperienceForm = ({ onSubmit, onCancel, showCancel }) => {
               {locationSuggestions.map((city, index) => (
                 <li
                   key={index}
-                  className={`flex items-center px-4 py-2 cursor-pointer ${
+                  className={`flex items-center px-4 py-2 cursor-pointer text-gray-800 dark:text-gray-100 ${
                     index === locationSelectedIndex 
                       ? 'bg-linkedin-100 text-linkedin-800 dark:bg-linkedin-800 dark:text-linkedin-100' 
                       : 'hover:bg-linkedin-50 dark:hover:bg-slate-700'
@@ -476,7 +516,7 @@ const ExperienceForm = ({ onSubmit, onCancel, showCancel }) => {
               name="category"
               value={formData.category}
               onChange={handleInputChange}
-              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-slate-700 text-gray-800 dark:text-gray-100 rounded-lg focus:ring-2 focus:ring-linkedin-500 focus:border-transparent transition-all duration-200 appearance-none pr-12"
+              className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 bg-white dark:bg-slate-700 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-linkedin-500 focus:border-transparent transition-all duration-200 appearance-none pr-12"
               style={{
                 backgroundImage: `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path d='M6 8l4 4 4-4' stroke='%230A66C2' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>")`,
                 backgroundRepeat: 'no-repeat',
@@ -534,7 +574,7 @@ const ExperienceForm = ({ onSubmit, onCancel, showCancel }) => {
             value={formData.description}
             onChange={handleInputChange}
             rows={3}
-        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-linkedin-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-slate-700 text-gray-800 dark:text-gray-100"
+            className="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-linkedin-500 focus:border-transparent transition-all duration-200 bg-white dark:bg-slate-700 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-400"
             placeholder="Brief description of your role and responsibilities..."
           />
         </div>

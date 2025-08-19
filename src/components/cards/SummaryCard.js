@@ -13,7 +13,7 @@ const SummaryCard = ({ experiences }) => {
             <Clock className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100">Total Experience</h3>
+            <h3 className="text-xl font-semibold text-gray-800 dark:text-white">Total Experience</h3>
             <p className="text-3xl font-bold bg-gradient-to-r from-green-500 to-emerald-600 bg-clip-text text-transparent">
               {getTotalExperience(experiences)}
             </p>
